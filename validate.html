@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>validate数据验证</title>
+		<script src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/underscore.js" ></script>
+		<script type="text/javascript" src="js/backbone.js" ></script>
+		<script></script>
+	</head>
+	<body>
+		<script>
+			$(function(){
+				var student = Backbone.Model.extend({
+					initialize: function(){
+						this.on('invalid',function(model,error){
+							console.log(error);
+						});
+					},
+					defaults:{
+						Code : "1001",
+						Name : "小茗",
+						age : 22
+					},
+					validate : function(attrs){
+						if(!_.isString(attrs.Name)) return "姓名必须是字符串";
+						if(!_.isNumber(attrs.age))  return "年龄必须是数字";
+					}
+				});
+				var stu = new student();
+				stu.set({
+					Code : "111",
+					Name : 444,
+					age : 33
+				},{"sildent":true});
+				//静默式更新
+				console.log(stu.toJSON());
+			});
+		</script>
+	</body>
+</html>

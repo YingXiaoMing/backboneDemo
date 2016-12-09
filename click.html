@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>点击显示隐藏事件</title>
+		<script type="text/javascript" src="js/jquery.js" ></script>
+		<script type="text/javascript" src="js/underscore.js" ></script>
+		<script type="text/javascript" src="js/backbone.js" ></script>
+	</head>
+	<body>
+		<div id=view>
+			<input type="button" value="显示" id="btnShow"/>
+			<input type="button" value="隐藏" id="btnHide"/>
+		</div>
+		<div id="info" style="display: none;">
+			<p>小茗超级帅</p>
+			<p>小茗不是一般地帅哦</p>
+		</div>
+		<script>
+			var appView = Backbone.View.extend({
+				el : "#view",
+				events: {
+					"click #btnShow" : 'showInfo',
+					"click #btnHide" : 'hideInfo'
+				},
+				showInfo: function(){
+					$("#info").show();
+				},
+				hideInfo: function(){
+					$("#info").hide();
+				}
+			});
+			var app = new appView();
+		</script>
+	</body>
+	
+</html>

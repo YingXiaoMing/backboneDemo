@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>template自定义模板</title>
+		<script type="text/javascript" src="js/jquery.js" ></script>
+		<script type="text/javascript" src="js/underscore.js" ></script>
+		<style type="text/css">
+			body{
+				font-size: 13px;
+			}
+			ul{
+				list-style-type: none;
+				padding: 0;
+				margin: 0;
+				width: 360px;
+			}
+			li:first-child span{
+				float: left;
+				border-bottom: solid 1px #ccc;
+				background: #eee;
+				font-weight: bold;
+			}
+			ul li span{
+				width: 80px;
+				text-align: left;
+				float: left;
+				padding: 0 5px;
+				border-bottom: dashed 1px #ccc;
+				line-height: 28px;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="element">
+			<li>
+				<span>学号</span>
+				<span>姓名</span>
+				<span>性别</span>
+				<span>总分</span>
+			</li>
+		</ul>
+		<script type="text/template" id="tpl">
+			<%  var intSum = 0, intAve = 0;
+				for(var i=0;i<list.length;i++){ %>
+			<% var item = list[i] %>
+			<li>
+				<span><%= item.stuId %></span>
+				<span><%= item.name %></span>
+				<span><%= item.sex %></span>
+				<span><%= item.score %></span>
+			</li>
+			
+			<%　 
+				intSum+=parseInt(item.score) 
+				intAve = intSum/list.length; 
+			} %>
+			<li>
+				<span>平均分:</span>
+				<span><%= intAve %></span>
+				<span>总分：</span>
+				<span><%= intSum %></span>
+			</li>
+		</script>
+		<script type="text/javascript">
+			var ele = $("#element");
+				tpl = $("#tpl").html();
+			var data = {
+				list : [
+				{stuId: 's0101',name:'小茗',sex:'男',score:'345'},
+				{stuId: 's0102',name:'小樱',sex:'女',score:'456'},
+				{stuId: 's0103',name:'小华',sex:'男',score:'789'},
+				{stuId: 's0104',name:'小绣',sex:'男',score:'012'},
+				]
+			}
+			var html = _.template(tpl, data);
+			ele.append(html);
+		</script>
+	</body>
+</html>
+  
